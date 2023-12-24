@@ -1,0 +1,21 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "NodeJS Express Server",
+  "main": "index.ts",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "fullstack-exercise"
+  },
+  "keywords": [
+    "Next",
+    "Express",
+    "Node",
+    "Jest"
+  ],
+  "author": "Martin Posso",
+  "license": "ISC"
+}
