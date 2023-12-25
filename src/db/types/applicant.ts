@@ -10,4 +10,5 @@ export type Applicant = {
   name: string;
   lastname: string;
   email: string;
+  address: Address;
 };
