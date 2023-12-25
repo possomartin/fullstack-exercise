@@ -6,6 +6,7 @@ import pgSession from "connect-pg-simple";
 
 import dbConnection from "./config/connection.js";
 import userRouter from "./routes/users.js";
+import applicantRouter from "./routes/applicants.js";
 
 dotenv.config();
 
@@ -32,6 +33,7 @@ app.use(
 );
 
 app.use("/users", userRouter);
+app.use("/awesome/applicant", applicantRouter);
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
