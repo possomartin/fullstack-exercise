@@ -1,6 +1,7 @@
 import express, { Router, Request, Response } from "express";
 import applicantService from "../db/services/applicantService.js";
 import { Applicant } from "../db/types/applicant.js";
+import isAuth from "../middleware/auth.js";
 
 const applicantRouter: Router = express.Router();
 const {
@@ -26,7 +27,7 @@ applicantRouter.get("/:id", async (req: Request, res: Response) => {
   }
 });
 
-applicantRouter.get("/", async (req: Request, res: Response) => {
+applicantRouter.get("/", isAuth, async (req: Request, res: Response) => {
   const foundApplicants = await getAllApplicants();
 
   if (!!foundApplicants && foundApplicants.length != 0) {
@@ -36,7 +37,7 @@ applicantRouter.get("/", async (req: Request, res: Response) => {
   }
 });
 
-applicantRouter.post("/", async (req: Request, res: Response) => {
+applicantRouter.post("/", isAuth, async (req: Request, res: Response) => {
   const applicant: Omit<Applicant, "id"> = {
     name: req.body.name,
     lastname: req.body.lastname,
@@ -58,7 +59,7 @@ applicantRouter.post("/", async (req: Request, res: Response) => {
   }
 });
 
-applicantRouter.patch("/", async (req: Request, res: Response) => {
+applicantRouter.patch("/", isAuth, async (req: Request, res: Response) => {
   const applicant: Partial<Applicant> = {
     ...req.body,
   };
@@ -77,7 +78,7 @@ applicantRouter.patch("/", async (req: Request, res: Response) => {
   }
 });
 
-applicantRouter.delete("/:id", async (req: Request, res: Response) => {
+applicantRouter.delete("/:id", isAuth, async (req: Request, res: Response) => {
   const id = Number(req.params.id);
   const deletedApplicant = deleteApplicant(id);
 

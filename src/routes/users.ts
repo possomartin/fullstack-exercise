@@ -23,7 +23,7 @@ userRouter.post("/register", async (req: Request, res: Response) => {
   }
 });
 
-userRouter.post("/register", async (req: Request, res: Response) => {
+userRouter.post("/login", async (req: Request, res: Response) => {
   const user: Omit<User, "id"> = {
     username: req.body.username,
     password: req.body.password,
@@ -34,6 +34,11 @@ userRouter.post("/register", async (req: Request, res: Response) => {
   if (!!foundUser) {
     req.session.user = foundUser;
     req.session.isAuth = true;
+
+    const hour = 3600000;
+    req.session.cookie.expires = new Date(Date.now() + hour);
+    req.session.cookie.maxAge = hour;
+
     res.status(200).json({ success: true, msg: "you are logged in!" });
   } else {
     res.status(400).json({ success: false, msg: "Couldn't logged you in :(" });
